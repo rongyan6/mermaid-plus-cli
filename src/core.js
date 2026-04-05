@@ -5,7 +5,7 @@
  *   1. Resolve theme options (beautiful-mermaid theme + optional overrides)
  *   2. Render SVG with renderMermaidSVG()
  *   3. Wrap SVG in an HTML page and write to a temp file
- *   4. Launch headless Chrome via puppeteer-core, screenshot the #wrap element
+ *   4. Launch headless Chrome via native CDP (Node 22+ built-in WebSocket), screenshot the #wrap element
  *   5. Write PNG buffer to disk
  *
  * SVG flow (format: 'svg'):
