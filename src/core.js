@@ -18,8 +18,8 @@ import { join, dirname, basename } from 'path'
 import { tmpdir } from 'os'
 import { createHash } from 'crypto'
 import { renderMermaidSVG, THEMES } from 'beautiful-mermaid'
-import puppeteer from 'puppeteer-core'
 import { findChrome } from './chrome.js'
+import { screenshotEntries } from './screenshot.js'
 
 // ── Defaults ──────────────────────────────────────────────────────────────────
 
@@ -137,63 +137,6 @@ function prepareSvg(svg, opts) {
     })
   }
   return out
-}
-
-// ── Chrome screenshot ─────────────────────────────────────────────────────────
-
-/**
- * Launch Chrome, screenshot #wrap from each HTML file, return PNG buffers.
- *
- * @param {Array<{htmlFile: string, [key: string]: any}>} entries
- * @param {object} opts  { chrome, width, scale, fontTimeout, transparent }
- * @returns {Promise<Array<{buffer?: Buffer, error?: string, ...entry}>>}
- */
-async function screenshotEntries(entries, opts) {
-  const chromePath = findChrome(opts.chrome)
-  const width = opts.width ?? DEFAULTS.width
-  const scale = opts.scale ?? DEFAULTS.scale
-  const fontTimeout = opts.fontTimeout ?? DEFAULTS.fontTimeout
-
-  const browser = await puppeteer.launch({
-    executablePath: chromePath,
-    headless: true,
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      `--force-device-scale-factor=${scale}`,
-      '--allow-file-access-from-files',
-    ],
-  })
-
-  const page = await browser.newPage()
-  await page.setViewport({ width: width + 80, height: 2400, deviceScaleFactor: scale })
-
-  const results = []
-
-  for (const entry of entries) {
-    try {
-      await page.goto(`file://${entry.htmlFile}`, { waitUntil: 'networkidle0', timeout: 15000 })
-
-      // Wait for fonts; if it times out, system font fallback is acceptable
-      await page.waitForFunction('window.__fontsReady === true', { timeout: fontTimeout })
-        .catch(() => {})
-
-      const wrap = await page.$('#wrap')
-      if (!wrap) throw new Error('#wrap element not found')
-
-      const buffer = await wrap.screenshot({
-        type: 'png',
-        omitBackground: opts.transparent ?? false,
-      })
-
-      results.push({ ...entry, buffer })
-    } catch (e) {
-      results.push({ ...entry, error: e.message })
-    }
-  }
-
-  await browser.close()
-  return results
 }
 
 // ── Public API ────────────────────────────────────────────────────────────────
