@@ -15,7 +15,7 @@ Built on top of [beautiful-mermaid](https://github.com/lukilabs/beautiful-mermai
 ## Requirements
 
 - **Node.js ≥ 22** (built-in `WebSocket` required for CDP)
-- **Google Chrome ≥ 146** installed on your system (for PNG export only)
+- **Google Chrome ≥ 112** installed on your system (for PNG export only)
   - macOS: `/Applications/Google Chrome.app` — auto-detected
   - Windows: `C:\Program Files\Google\Chrome\Application\chrome.exe` — auto-detected
   - Linux: `/usr/bin/google-chrome` or `/usr/bin/chromium` — auto-detected
@@ -111,7 +111,7 @@ console.log(Object.keys(THEMES)) // list all 15 theme names
 | `--layer-spacing <n>` | — | Vertical layer spacing in pixels |
 | `--width <n>` | `1200` | Render width in pixels |
 | `--scale <n>` | `2` | Device pixel ratio (2 = Retina) |
-| `--chrome <path>` | auto | Path to Chrome ≥ 146 executable |
+| `--chrome <path>` | auto | Path to Chrome ≥ 112 executable |
 | `--font-timeout <ms>` | `8000` | Max wait for web fonts to load |
 
 Color and layout flags override the selected `--theme`.

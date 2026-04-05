@@ -1,6 +1,6 @@
 {
   "name": "@rongyan/mermaid-plus-cli",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Convert mermaid diagrams in markdown to beautiful PNG or SVG using beautiful-mermaid and system Chrome",
   "type": "module",
   "main": "src/index.js",
