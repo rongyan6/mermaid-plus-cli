@@ -1,0 +1,46 @@
+{
+  "name": "@rongyan/mermaid-plus-cli",
+  "version": "0.1.0",
+  "description": "Convert mermaid diagrams in markdown to beautiful PNG or SVG using beautiful-mermaid and system Chrome",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "mmdpc": "src/cli.js"
+  },
+  "files": [
+    "src/"
+  ],
+  "keywords": [
+    "mermaid",
+    "diagram",
+    "png",
+    "svg",
+    "markdown",
+    "cli",
+    "beautiful-mermaid"
+  ],
+  "author": "rongyan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rongyan6/mermaid-plus-cli.git"
+  },
+  "homepage": "https://github.com/rongyan6/mermaid-plus-cli#readme",
+  "bugs": {
+    "url": "https://github.com/rongyan6/mermaid-plus-cli/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/cli.js"
+  },
+  "dependencies": {
+    "beautiful-mermaid": "latest",
+    "commander": "^14.0.0",
+    "puppeteer-core": "^24.0.0"
+  }
+}

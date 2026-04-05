@@ -1,0 +1,7 @@
+node_modules/
+
+# Test output files (generated, not committed)
+test/*.png
+test/*.svg
+test/assets/
+test/test/

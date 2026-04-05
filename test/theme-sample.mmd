@@ -1,0 +1,9 @@
+flowchart TD
+  A([Start]) --> B[Process Input]
+  B --> C{Valid?}
+  C -->|Yes| D[Execute]
+  C -->|No| E[Handle Error]
+  D --> F[(Store Result)]
+  E --> G[Log & Retry]
+  G --> B
+  F --> H([Done])
